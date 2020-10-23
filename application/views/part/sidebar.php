@@ -30,6 +30,41 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Simpanan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?=base_url('Simpanan');?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Daftar Simpanan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url('Transaksi/simpanan');?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Transaksi Simpanan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url('Laporan/MutasiSimpanan');?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Mutasi Simpanan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url('Laporan/TransaksiSimpanan');?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Daftar Transaksi </p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
