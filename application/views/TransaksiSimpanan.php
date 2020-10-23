@@ -58,13 +58,13 @@
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Nilai Transaksi</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control <?= $this->session->flashdata('error')['transaksi'] ? 'is-invalid' : '' ?>" id="transaksi" name="transaksi" placeholder="" value="0">
+              <input type="text" class="form-control <?= isset($this->session->flashdata('error')['transaksi']) ? 'is-invalid' : '' ?>" id="transaksi" name="transaksi" placeholder="" value="0">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Saldo Akhir</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control <?= $this->session->flashdata('error')['saldo_akhir'] ? 'is-invalid' : '' ?>" id="saldo_akhir" name="saldo_akhir" placeholder="saldo akhir" value="0" readonly>
+              <input type="text" class="form-control <?= isset($this->session->flashdata('error')['saldo_akhir']) ? 'is-invalid' : '' ?>" id="saldo_akhir" name="saldo_akhir" placeholder="saldo akhir" value="0" readonly>
             </div>
           </div>
         </div>

@@ -24,7 +24,7 @@
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">No Rekening</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control <?= $this->session->flashdata('error')['no_rekening'] ? 'is-invalid':'' ?>" id="no_rekening" name="no_rekening" placeholder="No Rekening" value="<?= $simpanan->no_rekening; ?>">
+              <input type="text" class="form-control <?= isset($this->session->flashdata('error')['no_rekening']) ? 'is-invalid':'' ?>" id="no_rekening" name="no_rekening" placeholder="No Rekening" value="<?= $simpanan->no_rekening; ?>">
             </div>
           </div>
           <div class="form-group row">
