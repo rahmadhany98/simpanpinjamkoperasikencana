@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Waktu pembuatan: 22 Okt 2020 pada 21.50
+-- Waktu pembuatan: 25 Okt 2020 pada 22.55
 -- Versi server: 5.7.31
 -- Versi PHP: 7.3.21
 
@@ -46,6 +46,44 @@ CREATE TABLE IF NOT EXISTS `anggota` (
 INSERT INTO `anggota` (`id`, `nama`, `alamat`, `jenis_kelamin`, `jenis_identitas`, `no_identitas`, `tanggal_lahir`) VALUES
 (2, 'Javiera Rahmadhany', 'Jalan Ahmad Yani No.17', 'Laki-Laki', 'KTP', '123456789', '1998-01-11'),
 (3, 'Saniah', 'Jalan Arjuna No. 18', 'Perempuan', 'KTP', '123987654', '1972-02-26');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pengajuan`
+--
+
+DROP TABLE IF EXISTS `pengajuan`;
+CREATE TABLE IF NOT EXISTS `pengajuan` (
+  `id_pengajuan` varchar(64) NOT NULL,
+  `tanggal` date DEFAULT NULL,
+  `nama` varchar(50) NOT NULL,
+  `no_identitas` varchar(20) NOT NULL,
+  `no_buku_tabungan` varchar(20) NOT NULL,
+  `alamat` text NOT NULL,
+  `no_telepon` varchar(15) NOT NULL,
+  `umur` varchar(2) NOT NULL,
+  `pekerjaan` varchar(50) NOT NULL,
+  `jumlah_pinjam` int(11) NOT NULL,
+  `lama_pinjam` varchar(2) NOT NULL,
+  `tujuan` varchar(100) NOT NULL,
+  `jaminan` varchar(50) NOT NULL,
+  `foto_jaminan` varchar(64) NOT NULL,
+  `foto_ktp` varchar(64) NOT NULL,
+  `foto_kk` varchar(64) NOT NULL,
+  `nama_penjamin` varchar(50) NOT NULL,
+  `alamat_penjamin` text NOT NULL,
+  `no_telepon_penjamin` varchar(15) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_pengajuan`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pengajuan`
+--
+
+INSERT INTO `pengajuan` (`id_pengajuan`, `tanggal`, `nama`, `no_identitas`, `no_buku_tabungan`, `alamat`, `no_telepon`, `umur`, `pekerjaan`, `jumlah_pinjam`, `lama_pinjam`, `tujuan`, `jaminan`, `foto_jaminan`, `foto_ktp`, `foto_kk`, `nama_penjamin`, `alamat_penjamin`, `no_telepon_penjamin`, `status`) VALUES
+('5f94183dacb6c', '2020-10-24', 'Javiera Rahmadhany', '123456789', '0103000000799', 'Jalan Ahmad Yani', '087876543', '22', 'Mahasiswa', 2500000, '12', 'Beli Laptop', 'Buku Tabungan', 'default.jpg', 'default.jpg', 'default.jpg', 'Wahab', 'Jalan Ahmad Yani', '089768342', 'Diverifikasi');
 
 -- --------------------------------------------------------
 
