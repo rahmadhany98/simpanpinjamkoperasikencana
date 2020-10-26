@@ -26,7 +26,7 @@ class M_pengajuan extends CI_Model {
     public $foto_kk;
     public $nama_penjamin;
     public $alamat_penjamin;
-    public $no_teleepon_penjamin;
+    public $no_telepon_penjamin;
     public $status;
 
     //datatable
@@ -126,6 +126,10 @@ class M_pengajuan extends CI_Model {
             'label' => 'Nama',
             'rules' => 'required'],
 
+            ['field' => 'tanggal',
+            'label' => 'Tanggal',
+            'rules' => 'required'],
+
             ['field' => 'alamat',
             'label' => 'Alamat',
             'rules' => 'required'],
@@ -134,9 +138,50 @@ class M_pengajuan extends CI_Model {
             'label' => 'No Identitas',
             'rules' => 'numeric|required'],
             
-            ['field' => 'tanggal_lahir',
-            'label' => 'Tanggal Lahir',
-            'rules' => 'required']
+            ['field' => 'no_buku_tabungan',
+            'label' => 'no buku tabungan',
+            'rules' => 'required'],
+
+            ['field' => 'no_telepon',
+            'label' => 'No telepon',
+            'rules' => 'numeric|required'],
+
+            ['field' => 'umur',
+            'label' => 'umur',
+            'rules' => 'numeric|required'],
+
+            ['field' => 'pekerjaan',
+            'label' => 'pekerjaan',
+            'rules' => 'required'],
+
+            ['field' => 'jumlah_pinjam',
+            'label' => 'jumlah_pinjam',
+            'rules' => 'numeric|required'],
+
+            ['field' => 'lama_pinjam',
+            'label' => 'lama_pinjam',
+            'rules' => 'numeric|required'],
+            
+            ['field' => 'tujuan',
+            'label' => 'tujuan',
+            'rules' => 'required'],
+
+            ['field' => 'jaminan',
+            'label' => 'jaminan',
+            'rules' => 'required'],
+
+            ['field' => 'nama_penjamin',
+            'label' => 'nama_penjamin',
+            'rules' => 'required'],
+
+            ['field' => 'alamat_penjamin',
+            'label' => 'alamat_penjamin',
+            'rules' => 'required'],
+
+            ['field' => 'no_telepon_penjamin',
+            'label' => 'no_telepon_penjamin',
+            'rules' => 'required'],
+
         ];
     }
 
@@ -148,6 +193,15 @@ class M_pengajuan extends CI_Model {
     public function getById($id)
     {
         return $this->db->get_where($this->table, ["id_pengajuan" => $id])->row();
+    }
+
+    function searchAnggota($str)
+    {
+        $this->db->select('no_rekening as id, no_rekening as text');
+        $this->db->like('no_rekening', $str);
+        $this->db->where('jenis_simpanan', 'Simpanan Tabungan');
+        $query = $this->db->get('simpanan');
+        return $query->result();
     }
 
     public function save()
@@ -171,7 +225,7 @@ class M_pengajuan extends CI_Model {
         $this->foto_kk = "default.jpg";
         $this->nama_penjamin = $post["nama_penjamin"];
         $this->alamat_penjamin = $post["alamat_penjamin"];
-        $this->no_teleepon_penjamin = $post["no_telepon_penjamin"];
+        $this->no_telepon_penjamin = $post["no_telepon_penjamin"];
         $this->status = "Diverifikasi";
         return $this->db->insert($this->table, $this);
     }
@@ -202,7 +256,7 @@ class M_pengajuan extends CI_Model {
         $this->foto_kk = "default.jpg";
         $this->nama_penjamin = $post["nama_penjamin"];
         $this->alamat_penjamin = $post["alamat_penjamin"];
-        $this->no_teleepon_penjamin = $post["no_telepon_penjamin"];
+        $this->no_telepon_penjamin = $post["no_telepon_penjamin"];
         $this->status = "Diverifikasi";
         return $this->db->update($this->table, $this, array('id_pengajuan' => $post["id_pengajuan"]));
     }

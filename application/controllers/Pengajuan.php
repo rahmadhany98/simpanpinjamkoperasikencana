@@ -48,6 +48,12 @@ class Pengajuan extends CI_Controller {
         echo json_encode($output);
     }
 
+    function selectsearch()
+    {
+        $q = $this->input->get('q');
+        echo json_encode($this->m_pengajuan->searchAnggota($q));
+    }
+
     public function add()
     {
         $data['content'] = 'AddPengajuan';
