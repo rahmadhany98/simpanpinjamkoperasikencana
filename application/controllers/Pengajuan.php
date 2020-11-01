@@ -34,7 +34,7 @@ class Pengajuan extends CI_Controller {
             $row[] = $pengajuan->alamat;
             $row[] = $pengajuan->jumlah_pinjam;
             $row[] = $pengajuan->lama_pinjam;
-            $row[] = '<a class="btn btn-warning btn-sm" href="'."".base_url('Pengajuan/edit/'.$pengajuan->id_pengajuan)."".'"><i class="fas fa-edit"></i> Edit</a> <button onclick="sweetAlert(this)" class="btn btn-danger btn-sm" value="delete/'."".$pengajuan->id_pengajuan."".'"><i class="fas fa-trash"></i> Delete</button>';
+            $row[] = '<a class="btn btn-warning btn-sm" href="'."".base_url('Pengajuan/edit/'.$pengajuan->id_pengajuan)."".'"><i class="fas fa-edit"></i> Edit</a> <button onclick="sweetAlert(this)" class="btn btn-danger btn-sm" value="delete/'."".$pengajuan->id_pengajuan."".'"><i class="fas fa-trash"></i> Delete</button> <a class="btn btn-success btn-sm" href="'."".base_url('Pengajuan/accept/'.$pengajuan->id_pengajuan)."".'"><i class="fas fa-check"></i> Accept</a> <a class="btn btn-danger btn-sm" href="'."".base_url('Pengajuan/reject/'.$pengajuan->id_pengajuan)."".'"><i class="fa fa-times"></i> Reject</a> ';
             $data[] = $row;
         }
  
@@ -112,6 +112,26 @@ class Pengajuan extends CI_Controller {
         }else {
             $this->session->set_flashdata('error', $validation->error_array());
             $this->session->set_flashdata('danger', 'Data tidak barhasil diubah');
+            redirect(base_url('Pengajuan/'));
+        }
+    }
+
+    public function accept($id=null)
+    {
+        if (!isset($id)) show_404();
+        
+        if ($this->m_pengajuan->accept($id)) {
+            $this->session->set_flashdata('success', 'Pengajuan Diterima');
+            redirect(base_url('Pengajuan/'));
+        }
+    }
+
+    public function reject($id=null)
+    {
+        if (!isset($id)) show_404();
+        
+        if ($this->m_pengajuan->reject($id)) {
+            $this->session->set_flashdata('danger', 'Pengajuan Ditolak');
             redirect(base_url('Pengajuan/'));
         }
     }

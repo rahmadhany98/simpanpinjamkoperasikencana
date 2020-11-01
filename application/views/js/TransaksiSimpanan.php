@@ -39,5 +39,5 @@ $('#transaksi').keyup(function() {
         $('#saldo_akhir').val((saldo_awal - transaksi ? saldo_awal - transaksi : 0));
     }
 
-})
+});
 </script>

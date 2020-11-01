@@ -261,6 +261,16 @@ class M_pengajuan extends CI_Model {
         return $this->db->update($this->table, $this, array('id_pengajuan' => $post["id_pengajuan"]));
     }
 
+    public function accept($id)
+    {
+        return $this->db->update($this->table, array('status' => 'Diterima'), array('id_pengajuan' => $id));
+    }
+
+    public function reject($id)
+    {
+        return $this->db->update($this->table, array('status' => 'Ditolak'), array('id_pengajuan' => $id));
+    }
+
 }
 
 /* End of file M_anggota.php */

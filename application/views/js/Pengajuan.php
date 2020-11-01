@@ -40,7 +40,7 @@ function sweetAlert(a){
         confirmButtonText: 'Yes'
     }).then((result) => {
         if (result.value) {
-            $(location).attr('href','<?= base_url('Anggota/')?>'+id);
+            $(location).attr('href','<?= base_url('Pengajuan/')?>'+id);
         }
     })
 };
