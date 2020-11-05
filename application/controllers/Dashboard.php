@@ -6,9 +6,10 @@ class Dashboard extends CI_Controller {
 
     public function index()
     {
-        $data['content'] = 'Dashboard';
-        $data['header'] = 'Dashboard';
-        $this->load->view('template', $data);
+        // $data['content'] = 'Dashboard';
+        // $data['header'] = 'Dashboard';
+        // $this->load->view('template', $data);
+        echo uniqid();
     }
 
 }

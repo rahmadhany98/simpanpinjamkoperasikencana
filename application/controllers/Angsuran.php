@@ -55,13 +55,18 @@ class Angsuran extends CI_Controller
 
     public function save()
     {
-
+        $id = $this->input->post('no_rekening');
         $transaksi = $this->m_angsuran;
         $validation = $this->form_validation;
         $validation->set_rules($transaksi->rules());
         if ($validation->run()) {
             $transaksi->save_pokok();
             $transaksi->save_bunga();
+            $jumlah_pinjaman = $this->m_angsuran->getJumlahPinjaman($id);
+            $sisa = $this->m_angsuran->getSisaPinjaman($id);
+            if($jumlah_pinjaman == $sisa) {
+            $transaksi->lunas($id);
+        }
             $this->session->set_flashdata('success', 'Data barhasil disimpan');
             redirect(base_url('Angsuran'));
         }else {

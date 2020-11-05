@@ -140,14 +140,10 @@ class M_angsuran extends CI_Model {
     //     return $this->db->delete($this->table, array("no_rekening" => $id));
     // }
 
-    // public function update()
-    // {
-    //     $post = $this->input->post();
-    //     $this->no_rekening = $post["no_rekening"];
-    //     $this->id_anggota = $post["id_anggota"];
-    //     $this->jenis_simpanan = $post["jenis_simpanan"];
-    //     return $this->db->update($this->table, $this, array('no_rekening' => $post['id']));
-    // }
+    public function lunas($id)
+    {
+        return $this->db->update('pinjaman', array('status' => 'Lunas'), array('no_pk' => $id));
+    }
 
 }
 
