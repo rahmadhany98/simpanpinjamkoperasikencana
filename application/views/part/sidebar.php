@@ -65,6 +65,47 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Pinjaman
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?=base_url('Pengajuan');?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Daftar Pengajuan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url('Pinjaman');?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Daftar Pinjaman</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url('Realisasi');?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Realisasi Pinjaman</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url('Angsuran');?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pembayaran Angsuran </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url('Laporan/TransaksiPinjaman');?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Daftar Transaksi </p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

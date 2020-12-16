@@ -2,16 +2,16 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_laporantransaksisimpanan extends CI_Model {
+class M_laporantransaksipinjaman extends CI_Model {
 
     //nama table
     private $table = 'transaksi';
 
 
     //datatable
-    var $column_order = array(null,'no_rekening','debit','kredit'); //set column field database for datatable orderable
-    var $column_search = array('no_rekening'); //set column field database for datatable searchable 
-    var $order = array('tanggal_input' => 'desc'); // default order 
+    // var $column_order = array(null,'no_rekening','debit','kredit'); //set column field database for datatable orderable
+    // var $column_search = array('no_rekening'); //set column field database for datatable searchable 
+    // var $order = array('tanggal_input' => 'desc'); // default order 
     public function __construct()
     {
         parent::__construct();
@@ -46,41 +46,41 @@ class M_laporantransaksisimpanan extends CI_Model {
             $this->db->where('tanggal_transaksi <=', date("YYYY-mm-dd"));
         }
         $this->db->group_start();
-        $this->db->where('kode_transaksi =', '101');
-        $this->db->or_where('kode_transaksi =', '102');
+        $this->db->where('kode_transaksi =', '301');
+        $this->db->or_where('kode_transaksi =', '302');
         $this->db->group_end();
         $i = 0;
      
-        foreach ($this->column_search as $item) // loop column 
-        {
-            if($_POST['search']['value']) // if datatable send POST for search
-            {
+        // foreach ($this->column_search as $item) // loop column 
+        // {
+        //     if($_POST['search']['value']) // if datatable send POST for search
+        //     {
                  
-                if($i===0) // first loop
-                {
-                    $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-                    $this->db->like($item, $_POST['search']['value']);
-                }
-                else
-                {
-                    $this->db->or_like($item, $_POST['search']['value']);
-                }
+        //         if($i===0) // first loop
+        //         {
+        //             $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
+        //             $this->db->like($item, $_POST['search']['value']);
+        //         }
+        //         else
+        //         {
+        //             $this->db->or_like($item, $_POST['search']['value']);
+        //         }
  
-                if(count($this->column_search) - 1 == $i) //last loop
-                    $this->db->group_end(); //close bracket
-            }
-            $i++;
-        }
+        //         if(count($this->column_search) - 1 == $i) //last loop
+        //             $this->db->group_end(); //close bracket
+        //     }
+        //     $i++;
+        // }
          
-        if(isset($_POST['order'])) // here order processing
-        {
-            $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-        } 
-        else if(isset($this->order))
-        {
-            $order = $this->order;
-            $this->db->order_by(key($order), $order[key($order)]);
-        }
+        // if(isset($_POST['order'])) // here order processing
+        // {
+        //     $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        // } 
+        // else if(isset($this->order))
+        // {
+        //     $order = $this->order;
+        //     $this->db->order_by(key($order), $order[key($order)]);
+        // }
     }
  
     public function get_datatables()

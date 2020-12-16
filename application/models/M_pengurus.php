@@ -2,26 +2,36 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_laporantransaksisimpanan extends CI_Model {
+class M_pengurus extends CI_Model {
 
     //nama table
-    private $table = 'transaksi';
+    private $table = 'users';
 
+    //field table
+    public $id;
+    public $nama;
+    public $role;
+    public $username;
+    public $password;
 
     //datatable
-    var $column_order = array(null,'no_rekening','debit','kredit'); //set column field database for datatable orderable
-    var $column_search = array('no_rekening'); //set column field database for datatable searchable 
-    var $order = array('tanggal_input' => 'desc'); // default order 
+    var $column_order = array(null, 'nama','role'); //set column field database for datatable orderable
+    var $column_search = array('nama','role'); //set column field database for datatable searchable 
+    var $order = array('id' => 'asc'); // default order 
     public function __construct()
     {
         parent::__construct();
     }
     
     //query filter datatable
-    private function _get_datatables_query_()
+    private function _get_datatables_query()
     {
+         
         // //add custom filter here
-        
+        // if($this->input->post('country'))
+        // {
+        //     $this->db->where('country', $this->input->post('country'));
+        // }
         // if($this->input->post('FirstName'))
         // {
         //     $this->db->like('FirstName', $this->input->post('FirstName'));
@@ -36,19 +46,6 @@ class M_laporantransaksisimpanan extends CI_Model {
         // }
  
         $this->db->from($this->table);
-        if($this->input->post('start_date') && $this->input->post('end_date'))
-        {
-            $this->db->where('tanggal_transaksi >=', $this->input->post('start_date'));
-            $this->db->where('tanggal_transaksi <=', $this->input->post('end_date'));
-        }else 
-        {
-            $this->db->where('tanggal_transaksi >=', date("YYYY-mm-dd"));
-            $this->db->where('tanggal_transaksi <=', date("YYYY-mm-dd"));
-        }
-        $this->db->group_start();
-        $this->db->where('kode_transaksi =', '101');
-        $this->db->or_where('kode_transaksi =', '102');
-        $this->db->group_end();
         $i = 0;
      
         foreach ($this->column_search as $item) // loop column 
@@ -85,7 +82,7 @@ class M_laporantransaksisimpanan extends CI_Model {
  
     public function get_datatables()
     {
-        $this->_get_datatables_query_();
+        $this->_get_datatables_query();
         if($_POST['length'] != -1)
         $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
@@ -94,7 +91,7 @@ class M_laporantransaksisimpanan extends CI_Model {
  
     public function count_filtered()
     {
-        $this->_get_datatables_query_();
+        $this->_get_datatables_query();
         $query = $this->db->get();
         return $query->num_rows();
     }
@@ -105,10 +102,68 @@ class M_laporantransaksisimpanan extends CI_Model {
         return $this->db->count_all_results();
     }
 
+    public function rules()
+    {
+        return [
+            ['field' => 'nama',
+            'label' => 'Nama',
+            'rules' => 'required'],
+
+            ['field' => 'role',
+            'label' => 'Role',
+            'rules' => 'required'],
+
+            ['field' => 'username',
+            'label' => 'Username',
+            'rules' => 'required']
+        ];
+    }
+
+    public function getAll()
+    {
+        return $this->db->get($this->table)->result();
+    }
     
+    public function getById($id)
+    {
+        return $this->db->get_where($this->table, ["id" => $id])->row();
+    }
+
+    public function save()
+    {
+        $post = $this->input->post();
+        $this->nama = $post["nama"];
+        $this->role = $post["role"];
+        $this->username = $post["username"];
+        $this->password = md5($post["password"]);
+        return $this->db->insert($this->table, $this);
+    }
+
+    public function delete($id)
+    {
+        return $this->db->delete($this->table, array("id" => $id));
+    }
+
+    public function update()
+    {
+        $post = $this->input->post();
+        $this->id = $post["id"];
+        $this->nama = $post["nama"];
+        $this->role = $post["role"];
+        $this->username = $post["username"];
+        if(!empty($post["password"])) 
+        {
+            $this->password = md5($post["password"]);
+        }else 
+        {
+            $this->password = $post["password_lama"];
+        }
+        
+        return $this->db->update($this->table, $this, array('id' => $post['id']));
+    }
 
 }
 
-/* End of file M_simpanan.php */
+/* End of file M_anggota.php */
 
 ?>

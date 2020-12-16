@@ -1,5 +1,27 @@
 <script type="text/javascript">
 var table = $("#table-1").DataTable({
+    dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                title: '',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'text-align', 'center' )
+                        .prepend(
+                            '<h5>No Rekening : '+$('.select2 option:selected').text()+'</h5>',
+                        );
+                    $(win.document.body)
+                        .css( 'text-align', 'center' )
+                        .prepend(
+                            '<h4>Mutasi Simpanan</h4>',
+                        );
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
+            }
+        ],
             "processing": true, //Feature control the processing indicator.
             "serverSide": true, //Feature control DataTables' server-side processing mode.
             "order": [], //Initial no order.

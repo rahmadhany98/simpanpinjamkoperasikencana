@@ -34,7 +34,14 @@ class Pengajuan extends CI_Controller {
             $row[] = $pengajuan->alamat;
             $row[] = $pengajuan->jumlah_pinjam;
             $row[] = $pengajuan->lama_pinjam;
+            $row[] = $pengajuan->status;
+            if($pengajuan->status == 'Diverifikasi')
+            {
             $row[] = '<a class="btn btn-warning btn-sm" href="'."".base_url('Pengajuan/edit/'.$pengajuan->id_pengajuan)."".'"><i class="fas fa-edit"></i> Edit</a> <button onclick="sweetAlert(this)" class="btn btn-danger btn-sm" value="delete/'."".$pengajuan->id_pengajuan."".'"><i class="fas fa-trash"></i> Delete</button> <a class="btn btn-success btn-sm" href="'."".base_url('Pengajuan/accept/'.$pengajuan->id_pengajuan)."".'"><i class="fas fa-check"></i> Accept</a> <a class="btn btn-danger btn-sm" href="'."".base_url('Pengajuan/reject/'.$pengajuan->id_pengajuan)."".'"><i class="fa fa-times"></i> Reject</a> ';
+            }else 
+            {
+                $row[] = '<a class="btn btn-primary btn-sm" href="'."".base_url('Pengajuan/detail/'.$pengajuan->id_pengajuan)."".'"><i class="fas fa-bars"></i> Detail</a>  ';
+            }
             $data[] = $row;
         }
  
@@ -134,6 +141,15 @@ class Pengajuan extends CI_Controller {
             $this->session->set_flashdata('danger', 'Pengajuan Ditolak');
             redirect(base_url('Pengajuan/'));
         }
+    }
+
+    public function detail($id)
+    {
+        $data['content'] = 'DetailPengajuan';
+        $data['header'] = 'Detail Pengajuan';
+        $data['js'] = 'DetailPengajuan.php';
+        $data['detail'] = $this->m_pengajuan->getById($id); 
+        $this->load->view('template', $data);
     }
 
 }

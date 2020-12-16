@@ -55,12 +55,13 @@
         </div>
         <div class="col-sm-12">
           <h4>Riwayat Angsuran</h4>
-        <table class="table table-hover">
+          <table id="table-1" class="table table-bordered table-striped">
           <thead>
             <tr>
               <th>No</th>
               <th>Tanggal Transaksi</th>
-              <th>Jumlah</th>
+              <th>Pokok</th>
+              <th>Bunga</th>
             </tr>
           </thead>
           <tbody>
@@ -69,8 +70,9 @@
             foreach ($detail as $det) { ?>
               <tr>
                 <td><?= $i++; ?></td>
-                <td><?= $det->tanggal_transaksi; ?></td>
-                <td><?= $det->kredit; ?></td>
+                <td><?= $det->tanggal; ?></td>
+                <td><?= $det->pokok; ?></td>
+                <td><?= $det->bunga; ?></td>
               </tr>
             <?php
             }

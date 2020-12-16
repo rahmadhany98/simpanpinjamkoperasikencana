@@ -61,7 +61,6 @@ class M_pengajuan extends CI_Model {
         // }
  
         $this->db->from($this->table);
-        $this->db->where('status', 'Diverifikasi');
         
         $i = 0;
      
@@ -220,9 +219,9 @@ class M_pengajuan extends CI_Model {
         $this->lama_pinjam = $post["lama_pinjam"];
         $this->tujuan = $post["tujuan"];
         $this->jaminan = $post["jaminan"];
-        $this->foto_jaminan = "default.jpg";
-        $this->foto_ktp = "default.jpg";
-        $this->foto_kk = "default.jpg";
+        $this->foto_jaminan = $this->_uploadImage('foto_jaminan');
+        $this->foto_ktp = $this->_uploadImage('foto_ktp');
+        $this->foto_kk = $this->_uploadImage('foto_kk');
         $this->nama_penjamin = $post["nama_penjamin"];
         $this->alamat_penjamin = $post["alamat_penjamin"];
         $this->no_telepon_penjamin = $post["no_telepon_penjamin"];
@@ -234,6 +233,26 @@ class M_pengajuan extends CI_Model {
     {
         return $this->db->delete($this->table, array("id_pengajuan" => $id));
     }
+
+    private function _uploadImage($id)
+{
+    $config['upload_path']          = './upload/pengajuan/';
+    $config['allowed_types']        = 'gif|jpg|png';
+    $config['file_name']            = $id.'_'.$this->id_pengajuan;
+    $config['overwrite']			= true;
+    $config['max_size']             = 1024; // 1MB
+    // $config['max_width']            = 1024;
+    // $config['max_height']           = 768;
+
+    $this->load->library('upload', $config);
+    $this->upload->initialize($config);
+
+    if ($this->upload->do_upload($id)) {
+        return $this->upload->data("file_name");
+    }
+    print_r($this->upload->display_errors());
+    //return "default.jpg";
+}
 
     public function update()
     {
@@ -251,9 +270,21 @@ class M_pengajuan extends CI_Model {
         $this->lama_pinjam = $post["lama_pinjam"];
         $this->tujuan = $post["tujuan"];
         $this->jaminan = $post["jaminan"];
-        $this->foto_jaminan = "default.jpg";
-        $this->foto_ktp = "default.jpg";
-        $this->foto_kk = "default.jpg";
+        if (!empty($_FILES["foto_jaminan"]["name"])) {
+            $this->foto_jaminan = $this->_uploadImage('foto_jaminan');
+        } else {
+        $this->foto_jaminan = $post["old_jaminan"];
+        }
+        if (!empty($_FILES["foto_ktp"]["name"])) {
+            $this->foto_ktp = $this->_uploadImage('foto_ktp');
+        } else {
+        $this->foto_ktp = $post["old_ktp"];
+        }
+        if (!empty($_FILES["foto_kk"]["name"])) {
+            $this->foto_kk = $this->_uploadImage('foto_kk');
+        } else {
+        $this->foto_kk = $post["old_kk"];
+        }
         $this->nama_penjamin = $post["nama_penjamin"];
         $this->alamat_penjamin = $post["alamat_penjamin"];
         $this->no_telepon_penjamin = $post["no_telepon_penjamin"];

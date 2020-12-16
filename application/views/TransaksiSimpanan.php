@@ -18,7 +18,7 @@
       <div class="card-header">
         <h3 class="card-title">Transaksi Simpanan</h3>
       </div>
-      <form class="form-horizontal" method="post" action="<?= base_url('Transaksi/save_simpanan'); ?>">
+      <form class="form-horizontal" method="post" action="<?= base_url('Transaksi/save_simpanan'); ?>" target="_blank">
         <div class="card-body">
 
           <div class="form-group row">

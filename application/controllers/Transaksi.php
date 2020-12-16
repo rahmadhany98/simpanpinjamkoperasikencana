@@ -63,12 +63,19 @@ class Transaksi extends CI_Controller
         if ($validation->run()) {
             $transaksi->save_simpanan();
             $this->session->set_flashdata('success', 'Data barhasil disimpan');
-            redirect(base_url('Transaksi/simpanan'));
+            redirect(base_url('Transaksi/cetaksimpanan'));
         }else {
             $this->session->set_flashdata('error', $validation->error_array());
             $this->session->set_flashdata('danger', 'Data tidak barhasil disimpan');
             redirect(base_url('Transaksi/simpanan'));
         }
+    }
+
+    public function cetaksimpanan()
+    {
+        $data['cetak'] = $this->m_transaksi->getLastRecord();
+        $this->load->view('kwitansi', $data);
+        
     }
 
     // public function delete($id=null)

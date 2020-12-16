@@ -17,10 +17,10 @@
     <!-- Default box -->
     <div class="card card-success card-outline">
       <div class="card-header">
-        <h3 class="card-title">Daftar Pengajuan</h3>
+        <h3 class="card-title">Daftar Pengurus</h3>
 
         <div class="card-tools">
-          <a href="<?= base_url('Pengajuan/add') ?>" class="btn btn-block btn-success btn-sm"><i class="fas fa-plus"></i> Tambah Pengajuan</a>
+          <a href="<?= base_url('Pengurus/add') ?>" class="btn btn-block btn-success btn-sm"><i class="fas fa-plus"></i> Tambah Anggota</a>
         </div>
       </div>
       <div class="card-body">
@@ -28,12 +28,8 @@
           <thead>
             <tr>
               <th>No</th>
-              <th>Tanggal</th>
               <th>Nama</th>
-              <th>Alamat</th>
-              <th>Jumlah Pinjam</th>
-              <th>Lama Pinjam (Bulan)</th>
-              <th>Status</th>
+              <th>Role</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -41,13 +37,9 @@
           </tbody>
           <tfoot>
             <tr>
-            <th>No</th>
-              <th>Tanggal</th>
+              <th>No</th>
               <th>Nama</th>
-              <th>Alamat</th>
-              <th>Jumlah Pinjam</th>
-              <th>Lama Pinjam (Bulan)</th>
-              <th>Status</th>
+              <th>Role</th>
               <th>Action</th>
             </tr>
           </tfoot>

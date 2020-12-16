@@ -137,7 +137,8 @@ class M_pinjaman extends CI_Model {
 
     public function getDetail($id)
     {
-        return $this->db->get_where('transaksi', ["no_rekening" => $id, "kode_transaksi" => "301"])->result();
+        $sql = 'SELECT transaksi.no_rekening, transaksi.tanggal_transaksi as tanggal, (SELECT transaksi.kredit FROM transaksi where transaksi.no_rekening = ? AND kode_transaksi = ? AND transaksi.tanggal_transaksi = tanggal GROUP BY transaksi.tanggal_transaksi) as pokok, (SELECT transaksi.kredit FROM transaksi where transaksi.no_rekening = ? AND kode_transaksi = ? AND transaksi.tanggal_transaksi = tanggal GROUP BY transaksi.tanggal_transaksi) as bunga FROM transaksi WHERE transaksi.no_rekening = ? AND transaksi.kode_transaksi = ? OR kode_transaksi = ? GROUP BY transaksi.tanggal_transaksi';
+        return $this->db->query($sql, array($id, '301', $id, '302', $id, '301', '302'))->result();
     }
 
     public function getNoPK($id)

@@ -81,6 +81,47 @@ class Laporan extends CI_Controller
         $this->load->view('template', $data);
     }
 
+    public function ajax_list_laporan_transaksi_pinjaman()
+    {
+        $this->load->model('M_laporantransaksipinjaman', 'm_laporan');
+        $list = $this->m_laporan->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $transaksi) {
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $transaksi->no_rekening;
+            if($transaksi->kode_transaksi == '301') 
+            {
+                $row[] = 'Pokok Angsuran';
+            }else 
+            {
+                $row[] = 'Bunga Angsuran';
+            }
+            $row[] = $transaksi->kredit;
+            
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->m_laporan->count_all(),
+                        "recordsFiltered" => $this->m_laporan->count_filtered(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    public function TransaksiPinjaman()
+    {
+        $data['content'] = 'LaporanTransaksiPinjaman';
+        $data['header'] = ' Laporan Transaksi Pinjaman';
+        $data['js'] = 'LaporanTransaksiPinjaman.php';
+        $this->load->view('template', $data);
+    }
+
 }
 
 /* End of file Simpanan.php */

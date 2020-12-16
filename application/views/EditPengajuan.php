@@ -110,6 +110,9 @@
               </div>
             </div>
           </div>
+          <input type="hidden" name="old_jaminan" value="<?= $pengajuan->foto_jaminan; ?>">
+          <input type="hidden" name="old_ktp" value="<?= $pengajuan->foto_ktp; ?>">
+          <input type="hidden" name="old_kk" value="<?= $pengajuan->foto_kk; ?>">
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Foto KTP</label>
             <div class="col-sm-10">

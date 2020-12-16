@@ -21,7 +21,7 @@ table = $("#table-1").DataTable({
                     $(win.document.body)
                         .css( 'text-align', 'center' )
                         .prepend(
-                            '<h4>Daftar Transaksi Simpanan</h4>',
+                            '<h4>Daftar Transaksi Pinjaman</h4>',
                         );
                     $(win.document.body).find( 'table' )
                         .addClass( 'compact' )
@@ -36,7 +36,7 @@ table = $("#table-1").DataTable({
  
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "<?= base_url();?>Laporan/ajax_list_laporan_transaksi_simpanan",
+            "url": "<?= base_url();?>Laporan/ajax_list_laporan_transaksi_pinjaman",
             "type": "POST",
             "data": function (data) 
             {
@@ -52,7 +52,7 @@ table = $("#table-1").DataTable({
             "orderable": false, //set not orderable
         },
         {
-            "targets": [ 2,-1 ],
+            "targets": [ -1 ],
             "render": function(data, type, row) {
                 return Number(data).toLocaleString('id', {
                     style: 'currency',
@@ -72,13 +72,6 @@ table = $("#table-1").DataTable({
                         i : 0;
             };
  
-            // computing column Total of the complete result 
-            var debitTotal = api
-                .column( 2 )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
 				
 	    var kreditTotal = api
                 .column( 3 )
@@ -89,11 +82,6 @@ table = $("#table-1").DataTable({
 			
 				
             // Update footer by showing the total with the reference of the column index 
-	    $( api.column( 1 ).footer() ).html('Total');
-            $( api.column( 2 ).footer() ).html(debitTotal.toLocaleString('id', {
-                    style: 'currency',
-                    currency: 'IDR'
-                }));
             $( api.column( 3 ).footer() ).html(kreditTotal.toLocaleString('id', {
                     style: 'currency',
                     currency: 'IDR'

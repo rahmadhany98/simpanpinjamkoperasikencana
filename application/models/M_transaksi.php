@@ -105,6 +105,18 @@ class M_transaksi extends CI_Model {
         return $this->db->insert($this->table, $this);
     }
 
+    public function getLastRecord()
+    {
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where('kode_transaksi', '101');
+        $this->db->or_where('kode_transaksi', '102');
+        $this->db->order_by('tanggal_input', 'DESC');
+        $this->db->limit(1);
+        $query = $this->db->get();
+        return $query->row();
+    }
+
     // public function delete($id)
     // {
     //     return $this->db->delete($this->table, array("no_rekening" => $id));
